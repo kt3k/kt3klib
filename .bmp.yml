@@ -1,4 +1,6 @@
-version: 0.0.2
+version: 0.0.3
 commit: 'chore: bump to v%.%.%'
 files:
-  README.md: kt3klib v%.%.%
+  README.md:
+    - kt3klib v%.%.%
+    - 'https://deno.land/x/kt3klib@v%.%.%/'

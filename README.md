@@ -1,4 +1,4 @@
-# kt3klib v0.0.2
+# kt3klib v0.0.3
 
 kt3klib is a collection of random independent modules.
 
@@ -7,7 +7,7 @@ kt3klib is a collection of random independent modules.
 Runs the given function the specified times per second.
 
 ```ts
-import { gameloop } from "https://deno.land/x/kt3klib@v0.0.2/gameloop.ts";
+import { gameloop } from "https://deno.land/x/kt3klib@v0.0.3/gameloop.ts";
 
 function main() {
   // your main routine
@@ -29,7 +29,7 @@ TBD
 HTML class attribute utility. A fork of [clsx](https://github.com/lukeed/clsx).
 
 ```ts
-import { cl } from "https://deno.land/x/kt3klib@v0.0.2/cl.ts";
+import { cl } from "https://deno.land/x/kt3klib@v0.0.3/cl.ts";
 
 // Strings (variadic)
 cl("foo", true && "bar", "baz");
