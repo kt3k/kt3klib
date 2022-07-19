@@ -1,4 +1,5 @@
-//
+// Copyright 2022 Yoshiya Hinosawa. All rights reserved. MIT license.
+
 class Gameloop {
   main: () => void;
   timer?: number;
