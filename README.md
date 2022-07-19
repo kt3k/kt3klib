@@ -26,7 +26,8 @@ TBD
 
 ## cl.ts
 
-HTML class attribute utility. A fork of [clsx](https://github.com/lukeed/clsx) by Luke Edwards.
+HTML class attribute utility. A fork of [clsx](https://github.com/lukeed/clsx)
+by Luke Edwards.
 
 ```ts
 import { cl } from "https://deno.land/x/kt3klib@v0.0.3/cl.ts";
