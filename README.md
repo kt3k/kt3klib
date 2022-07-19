@@ -1,10 +1,10 @@
 # kt3klib v0.0.3
 
-kt3klib is a collection of random independent modules.
+kt3klib is a collection of random utility modules.
 
 ## gameloop.ts
 
-Runs the given function the specified times per second.
+Runs the given function specified times per second.
 
 ```ts
 import { gameloop } from "https://deno.land/x/kt3klib@v0.0.3/gameloop.ts";
