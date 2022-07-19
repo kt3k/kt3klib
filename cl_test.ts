@@ -92,3 +92,70 @@ Deno.test("(compat) handles all types of truthy and falsy property values as exp
     "nonEmptyString whitespace function emptyObject nonEmptyObject emptyList nonEmptyList greaterZero",
   );
 });
+
+Deno.test("strings", () => {
+  assertEquals(cl(""), "");
+  assertEquals(cl("foo"), "foo");
+  assertEquals(cl(true && "foo"), "foo");
+  assertEquals(cl(false && "foo"), "");
+});
+
+Deno.test("strings (variadic)", () => {
+  assertEquals(cl(""), "");
+  assertEquals(cl("foo", "bar"), "foo bar");
+  assertEquals(cl(true && "foo", false && "bar", "baz"), "foo baz");
+  assertEquals(cl(false && "foo", "bar", "baz", ""), "bar baz");
+});
+
+Deno.test("objects", () => {
+  assertEquals(cl({}), "");
+  assertEquals(cl({ foo: true }), "foo");
+  assertEquals(cl({ foo: true, bar: false }), "foo");
+  assertEquals(cl({ foo: "hiya", bar: 1 }), "foo bar");
+  assertEquals(cl({ foo: 1, bar: 0, baz: 1 }), "foo baz");
+  assertEquals(cl({ "-foo": 1, "--bar": 1 }), "-foo --bar");
+});
+
+Deno.test("objects (variadic)", () => {
+  assertEquals(cl({}, {}), "");
+  assertEquals(cl({ foo: 1 }, { bar: 2 }), "foo bar");
+  assertEquals(cl({ foo: 1 }, null, { baz: 1, bat: 0 }), "foo baz");
+  assertEquals(
+    cl({ foo: 1 }, {}, {}, { bar: "a" }, { baz: null, bat: Infinity }),
+    "foo bar bat",
+  );
+});
+
+Deno.test("arrays", () => {
+  assertEquals(cl([]), "");
+  assertEquals(cl(["foo"]), "foo");
+  assertEquals(cl(["foo", "bar"]), "foo bar");
+  assertEquals(cl(["foo", 0 && "bar", 1 && "baz"]), "foo baz");
+});
+
+Deno.test("arrays (nested)", () => {
+  assertEquals(cl([[[]]]), "");
+  assertEquals(cl([[["foo"]]]), "foo");
+  assertEquals(cl([true, [["foo"]]]), "foo");
+  assertEquals(cl(["foo", ["bar", ["", [["baz"]]]]]), "foo bar baz");
+});
+
+Deno.test("arrays (variadic)", () => {
+  assertEquals(cl([], []), "");
+  assertEquals(cl(["foo"], ["bar"]), "foo bar");
+  assertEquals(cl(["foo"], null, ["baz", ""], true, "", []), "foo baz");
+});
+
+Deno.test("arrays (no `push` escape)", () => {
+  assertEquals(cl({ push: 1 }), "push");
+  assertEquals(cl({ pop: true }), "pop");
+  assertEquals(cl({ push: true }), "push");
+  assertEquals(cl("hello", { world: 1, push: true }), "hello world push");
+});
+
+Deno.test("functions", () => {
+  const foo = () => {};
+  assertEquals(cl(foo, "hello"), "hello");
+  assertEquals(cl(foo, "hello", cl), "hello");
+  assertEquals(cl(foo, "hello", [[cl], "world"]), "hello world");
+});
